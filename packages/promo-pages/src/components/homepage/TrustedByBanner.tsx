@@ -121,10 +121,12 @@ const TrustedByBanner = () => {
 
 	return (
 		<>
-			<h3 className={'text-center mt-20 mb-10'}>Trusted by</h3>
+			<div className="hairline-t mt-16 pt-4 mb-10 hud text-muted">
+				Deployments in production
+			</div>
 			<div
 				className={
-					'text-center flex flex-col lg:flex-row flex-nowrap justify-center items-center gap-10 mb-20'
+					'flex flex-col lg:flex-row flex-nowrap items-center gap-10 mb-4'
 				}
 			>
 				{logos.map((logo) => (

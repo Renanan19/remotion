@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {IsMutedIcon, NotMutedIcon, PausedIcon, PlayingIcon} from './Demo/icons';
 import {MuxVideo} from './MuxVideo';
-import {SectionTitle} from './VideoAppsTitle';
 
 const tabs = [
 	'Music visualization',
@@ -129,9 +128,6 @@ export const BuiltWithRemotionShowcase: React.FC = () => {
 
 	return (
 		<div ref={containerRef}>
-			<SectionTitle index="05" subject="Field evidence">
-				Built with Remotion
-			</SectionTitle>
 			<div className="flex flex-wrap gap-x-8 gap-y-3 mb-6 mt-4">
 				{tabs.map((tab, index) => (
 					<button
@@ -184,7 +180,7 @@ export const BuiltWithRemotionShowcase: React.FC = () => {
 						<button
 							type="button"
 							className={
-								'absolute bottom-2.5 left-2.5 bg-white text-black rounded-full w-8 h-8 flex justify-center items-center text-base cursor-pointer transition-colors border-2 border-black border-solid'
+								'absolute bottom-2.5 left-2.5 bg-pane text-text w-8 h-8 flex justify-center items-center text-base cursor-pointer transition-colors border border-solid border-[var(--border-color)]'
 							}
 							onClick={(e) => {
 								e.stopPropagation();
@@ -216,7 +212,7 @@ export const BuiltWithRemotionShowcase: React.FC = () => {
 						<button
 							type="button"
 							className={
-								'absolute bottom-2.5 right-2.5 bg-white text-black rounded-full w-8 h-8 flex justify-center items-center text-base cursor-pointer transition-colors border-2 border-black border-solid'
+								'absolute bottom-2.5 right-2.5 bg-pane text-text w-8 h-8 flex justify-center items-center text-base cursor-pointer transition-colors border border-solid border-[var(--border-color)]'
 							}
 							onClick={(e) => {
 								e.stopPropagation();
@@ -243,7 +239,7 @@ export const BuiltWithRemotionShowcase: React.FC = () => {
 						</button>
 					</div>
 					<div className={'p-6 lg:p-10 flex min-w-0 flex-col justify-center'}>
-						<div className="text-3xl font-bold fontbrand mt-0">
+						<div className="display text-4xl mt-0">
 							{videoApps[activeTab].title}
 						</div>
 						<div className="text-muted mt-3 text-base fontbrand leading-relaxed">

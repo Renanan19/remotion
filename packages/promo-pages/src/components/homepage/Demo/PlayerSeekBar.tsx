@@ -124,7 +124,19 @@ export const PlayerSeekBar: React.FC<{
 }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const barHovered = useHoverState(containerRef, false);
-	const size = useElementSize(containerRef.current);
+	/*
+	 * Reading `containerRef.current` during render fed a different value into
+	 * `useElementSize` on every frame update, which re-ran its effect and
+	 * re-subscribed the ResizeObserver in a loop ("Maximum update depth
+	 * exceeded" once the demo scrolled into view). A state-backed callback ref
+	 * gives the hook one stable element instead.
+	 */
+	const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null);
+	const setContainer = useCallback((el: HTMLDivElement | null) => {
+		containerRef.current = el;
+		setContainerEl(el);
+	}, []);
+	const size = useElementSize(containerEl);
 	const [playing, setPlaying] = useState(false);
 
 	const [frame, setFrame] = useState(0);
@@ -311,7 +323,7 @@ export const PlayerSeekBar: React.FC<{
 
 	return (
 		<div
-			ref={containerRef}
+			ref={setContainer}
 			onPointerDown={onPointerDown}
 			style={containerStyle}
 		>

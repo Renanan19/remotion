@@ -24,9 +24,7 @@ const EvaluateRemotionSection: React.FC = () => {
 	return (
 		<div className="flex flex-col lg:flex-row gap-2">
 			<div className={'card flex-1 flex flex-col'}>
-				<div className={'fontbrand text-2xl font-bold'}>
-					Questions about our license?
-				</div>
+				<div className={'display text-3xl'}>Questions about our license?</div>
 				<p className={'text-muted fontbrand leading-snug'}>
 					Book a 20 minute call or write us an email to get all your questions
 					answered.
@@ -54,7 +52,7 @@ const EvaluateRemotionSection: React.FC = () => {
 				</div>
 			</div>
 			<div className={'card flex-1 flex flex-col'}>
-				<div className={'fontbrand text-2xl font-bold'}>
+				<div className={'display text-3xl'}>
 					Get help with your Remotion project
 				</div>
 				<p className={'text-muted fontbrand leading-snug'}>
@@ -72,7 +70,7 @@ const EvaluateRemotionSection: React.FC = () => {
 							<div
 								key={avatar}
 								className={
-									'w-12 h-12 rounded-full bg-muted bg-cover bg-center -ml-5 border-2 border-black'
+									'w-12 h-12 rounded-full bg-muted bg-cover bg-center -ml-5 border border-[var(--border-color)]'
 								}
 								style={{backgroundImage: `url(${avatar})`}}
 							/>

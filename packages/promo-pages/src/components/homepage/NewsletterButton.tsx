@@ -1,6 +1,5 @@
 import {Button, CheckIcon, Input, PlanePaperIcon} from '@remotion/design';
 import React, {useCallback, useState} from 'react';
-import {SectionTitle} from './VideoAppsTitle';
 
 export const NewsletterButton: React.FC<{}> = () => {
 	const [email, setEmail] = useState('');
@@ -45,16 +44,13 @@ export const NewsletterButton: React.FC<{}> = () => {
 			<div className="flex flex-col">
 				<div className={'w-full'}>
 					<div className={'flex flex-col flex-1'}>
-						<SectionTitle index="08" subject="Dispatch">
-							Newsletter
-						</SectionTitle>
 						<form
 							onSubmit={handleSubmit}
 							style={{
 								width: '100%',
 							}}
 						>
-							<div className={'fontbrand text-muted mb-8 mt-3 max-w-[60ch]'}>
+							<div className={'term text-muted mb-8 max-w-[60ch]'}>
 								Read about new features and noteworthy updates we have made on
 								Remotion once in a while.{' '}
 							</div>

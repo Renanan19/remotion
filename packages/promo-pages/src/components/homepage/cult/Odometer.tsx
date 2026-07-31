@@ -24,8 +24,8 @@ const Digit: React.FC<{
 				className="flex flex-col"
 				style={{
 					transform: `translateY(${rolling ? -landed * (100 / CELLS) : 0}%)`,
-					transition: 'transform 1400ms cubic-bezier(0.16, 1, 0.3, 1)',
-					transitionDelay: `${index * 90}ms`,
+					transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+					transitionDelay: `${index * 45}ms`,
 				}}
 			>
 				{Array.from({length: CELLS}, (_, i) => (

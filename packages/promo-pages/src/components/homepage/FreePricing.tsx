@@ -7,7 +7,7 @@ const Container: React.FC<{readonly children: React.ReactNode}> = ({
 	children,
 }) => {
 	return (
-		<div className={'flex flex-col border-effect rounded-xl p-5 bg-pane'}>
+		<div className={'flex flex-col border-effect border-effect p-5 bg-pane'}>
 			{children}
 		</div>
 	);
@@ -17,9 +17,7 @@ const Title: React.FC<{
 	readonly children: React.ReactNode;
 }> = ({children}) => {
 	return (
-		<div className="text-4xl font-bold leading-none fontbrand mt-2 mb-5">
-			{children}
-		</div>
+		<div className="display text-4xl leading-none mt-2 mb-5">{children}</div>
 	);
 };
 
@@ -82,7 +80,7 @@ const PricingSlider: React.FC<{
 						appearance: none;
 						height: 12px;
 						border-radius: 8px;
-						border: 2px solid black;
+						border: 1px solid var(--border-color);
 						cursor: pointer;
 					}
 				.pricing-slider::-webkit-slider-thumb {
@@ -91,8 +89,8 @@ const PricingSlider: React.FC<{
 					width: 24px;
 					height: 24px;
 					border-radius: 50%;
-					background: white;
-					border: 2px solid black;
+					background: var(--text-color);
+					border: 1px solid var(--border-color);
 					border-bottom-width: 4px;
 					cursor: pointer;
 					scale: 1.2;
@@ -101,8 +99,8 @@ const PricingSlider: React.FC<{
 					width: 24px;
 					height: 24px;
 					border-radius: 50%;
-					background: white;
-					border: 2px solid black;
+					background: var(--text-color);
+					border: 1px solid var(--border-color);
 					border-bottom-width: 4px;
 					scale: 1.2;
 					cursor: pointer;

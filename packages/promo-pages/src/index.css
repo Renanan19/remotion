@@ -59,7 +59,7 @@
 	--ember: #a8712a;
 	--grid-line: rgba(19, 18, 16, 0.05);
 	--hud-bg: rgba(241, 239, 234, 0.82);
-	--grain-opacity: 0.028;
+	--grain-opacity: 0.04;
 	color: var(--text-color);
 }
 
@@ -87,7 +87,7 @@
 	--ember: #e8a33d;
 	--grid-line: rgba(236, 233, 227, 0.04);
 	--hud-bg: rgba(8, 9, 10, 0.72);
-	--grain-opacity: 0.05;
+	--grain-opacity: 0.1;
 	color: var(--text-color);
 }
 
@@ -154,8 +154,14 @@ html {
 	/* The following colors are required for the design system to work */
 	--font-brand: 'GTPlanar', sans-serif;
 	--font-brand--font-feature-settings: 'ss03' 1;
-	--color-brand: #0b84f3;
-	--color-warn: #ff3232;
+	/*
+	 * One accent does interaction. Ember is it — links, checkmarks, tabs and
+	 * every `text-brand` call site inherit it, which is what stops the page
+	 * from running two colour systems at once. Blue survives only inside the
+	 * demo composition, where it is product output rather than interface.
+	 */
+	--color-brand: var(--ember);
+	--color-warn: var(--signal);
 	--color-text: var(--text-color);
 	--color-button-bg: var(--plain-button);
 	--color-card-bg: var(--card-bg);
@@ -195,9 +201,9 @@ html {
 /* Any label that belongs to the instrument rather than to the product. */
 @utility hud {
 	font-family: var(--stack-terminal);
-	font-size: 10px;
+	font-size: 11px;
 	line-height: 1.2;
-	letter-spacing: 0.16em;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	font-weight: 500;
 	font-variant-numeric: tabular-nums;
@@ -205,14 +211,33 @@ html {
 
 @utility hud-sm {
 	@apply hud;
-	font-size: 9px;
-	letter-spacing: 0.2em;
+	font-size: 11px;
+	letter-spacing: 0.1em;
 }
 
 @utility hud-lg {
 	@apply hud;
 	font-size: 12px;
-	letter-spacing: 0.14em;
+	letter-spacing: 0.12em;
+}
+
+/*
+ * The reading layer. Mono at reading size, sentence case, no tracking —
+ * this is what makes the page an instrument rather than a dark site with a
+ * mono strip. Descriptive copy uses it; interactive UI keeps GT Planar.
+ */
+@utility term {
+	font-family: var(--stack-terminal);
+	font-size: 13px;
+	line-height: 1.7;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+@utility term-lg {
+	@apply term;
+	font-size: 15px;
+	line-height: 1.65;
 }
 
 @utility display {
@@ -258,28 +283,40 @@ html {
 	border-right: var(--hairline) solid var(--border-color);
 }
 
-.corner-ticks::before,
-.corner-ticks::after {
-	content: '';
-	position: absolute;
-	width: var(--tick);
-	height: var(--tick);
-	pointer-events: none;
-	opacity: 0.85;
-}
-
-.corner-ticks::before {
-	top: -1px;
-	left: -1px;
-	border-top: var(--hairline) solid var(--text-color);
-	border-left: var(--hairline) solid var(--text-color);
-}
-
-.corner-ticks::after {
-	bottom: -1px;
-	right: -1px;
-	border-bottom: var(--hairline) solid var(--text-color);
-	border-right: var(--hairline) solid var(--text-color);
+/*
+ * Four L-shaped marks, one per corner, drawn as a background so the element
+ * keeps both pseudo-elements free. Symmetry matters: two corners read as a
+ * rendering glitch, four read as a registration target.
+ */
+.corner-ticks {
+	background-image:
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color)),
+		linear-gradient(var(--text-color), var(--text-color));
+	background-repeat: no-repeat;
+	background-size:
+		var(--tick) var(--hairline),
+		var(--hairline) var(--tick),
+		var(--tick) var(--hairline),
+		var(--hairline) var(--tick),
+		var(--tick) var(--hairline),
+		var(--hairline) var(--tick),
+		var(--tick) var(--hairline),
+		var(--hairline) var(--tick);
+	background-position:
+		top left,
+		top left,
+		top right,
+		top right,
+		bottom left,
+		bottom left,
+		bottom right,
+		bottom right;
 }
 
 /* Engineering grid, barely visible — the sheet the page is drawn on. */
@@ -287,8 +324,9 @@ html {
 	background-image:
 		linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
 		linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-	background-size: 64px 64px;
-	background-position: center center;
+	/* One module of the 1240px content column, so lines meet plate edges. */
+	background-size: 103.33px 103.33px;
+	background-position: left top;
 }
 
 /* Sensor grain over the whole document. Static, cheap, no repaint. */
@@ -300,7 +338,26 @@ html {
 	pointer-events: none;
 	opacity: var(--grain-opacity);
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-	mix-blend-mode: overlay;
+	/* `overlay` cancels itself against a near-black ground; soft-light lands. */
+	mix-blend-mode: soft-light;
+}
+
+/*
+ * Section rules run the full width of the viewport while their content stays
+ * in the column — the page reads as a stack of plates, not a blog.
+ */
+@utility full-bleed-rule {
+	position: relative;
+}
+
+.full-bleed-rule::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-top: var(--hairline) solid var(--border-color);
+	pointer-events: none;
 }
 
 @keyframes rec-blink {

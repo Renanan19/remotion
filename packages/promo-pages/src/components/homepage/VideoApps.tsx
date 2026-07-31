@@ -58,7 +58,7 @@ const Pane: React.FC<{
 	readonly children: React.ReactNode;
 }> = ({children}) => {
 	return (
-		<div className="border-effect bg-pane flex-1 p-3 rounded-lg min-h-[500px] flex flex-col text-center">
+		<div className="border-effect bg-pane flex-1 p-3 min-h-[500px] flex flex-col text-center">
 			{children}
 		</div>
 	);

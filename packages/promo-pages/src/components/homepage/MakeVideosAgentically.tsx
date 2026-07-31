@@ -68,7 +68,7 @@ export const MakeVideosAgentically: React.FC<{
 							width: 400,
 							maxWidth: '100%',
 							maxHeight: '100%',
-							borderRadius: 7,
+							borderRadius: 2,
 							overflow: 'hidden',
 						}}
 						className="cursor-default! relative object-contain"
@@ -76,10 +76,8 @@ export const MakeVideosAgentically: React.FC<{
 				) : null}
 			</div>
 			<div className="font-brand">
-				<h2 className="text-2xl fontbrand leading-[1.1] font-medium">
-					{title}
-				</h2>
-				<p className="leading-relaxed">{description}</p>
+				<h2 className="display text-3xl leading-[1.05] mb-2">{title}</h2>
+				<p className="term text-muted">{description}</p>
 				{showLinks ? <MakeVideosLinks links={links} /> : null}
 			</div>
 		</div>

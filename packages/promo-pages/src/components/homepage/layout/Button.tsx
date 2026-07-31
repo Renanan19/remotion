@@ -47,7 +47,7 @@ export const Button: React.FC<Props> = (props) => {
 		<button
 			type="button"
 			className={cn(
-				'text-base rounded-lg font-bold appearance-none border-2 border-solid border-black border-b-4 font-sans flex flex-row items-center justify-center ',
+				'text-base font-bold appearance-none border border-solid border-[var(--border-color)] font-sans flex flex-row items-center justify-center ',
 				className,
 			)}
 			disabled={actualDisabled}

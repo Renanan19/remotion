@@ -111,7 +111,7 @@ export const Demo: React.FC = () => {
 	return (
 		<div id="demo" className="pt-24">
 			<SectionTitle
-				index="04"
+				index="03"
 				subject="Live specimen"
 				note="Rendered in your browser, right now."
 			>

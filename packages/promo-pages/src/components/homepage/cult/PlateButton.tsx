@@ -17,8 +17,8 @@ export const PlateButton: React.FC<PlateButtonProps> = ({
 		<Button
 			{...(props as PlateButtonProps)}
 			className={cn(
-				'rounded-none border border-b border-[var(--border-color)] bg-pane text-text',
-				'hud-lg h-11 px-5 transition-colors hover:bg-[var(--clear-hover)]',
+				'rounded-none border border-[var(--border-color)] bg-pane text-text',
+				'hud-lg h-11 px-4 sm:px-5 transition-colors hover:bg-[var(--clear-hover)]',
 				className,
 			)}
 		/>
