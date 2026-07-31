@@ -8,6 +8,14 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
+	/* Terminal chrome: every label, coordinate and counter is set in mono. */
+	--stack-terminal:
+		'PlexMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	/* Editorial counterweight to the mono. Used for display sizes only. */
+	--stack-display:
+		'InstrumentSerif', 'Iowan Old Style', Palatino, Georgia, serif;
+	--hairline: 1px;
+	--tick: 8px;
 	--ifm-color-primary: #0b84f3;
 	--ifm-color-primary-dark: #0a77db;
 	--ifm-color-primary-darker: #0970cf;
@@ -27,47 +35,59 @@
 	--ifm-color-emphasis-200: #ebedf0;
 }
 
+/* Light is the declassified-paper mode: warm archive stock, ink, no glow. */
 [data-theme='light'] {
-	--background: #f8fafc;
-	--footer-background: #fcfcfc;
-	--footer-border: #eaeaea;
-	--text-color: #000;
+	--background: #f1efea;
+	--footer-background: #ebe8e2;
+	--footer-border: rgba(19, 18, 16, 0.12);
+	--text-color: #131210;
 	--blue-button-color: #084696;
 	--blue-underlay: var(--ifm-color-primary);
-	--plain-button: #fff;
+	--plain-button: #fbfaf8;
 	--blue-underlay-hover: #d5e5fd;
-	--light-text-color: #777;
-	--subtitle: #666;
-	--clear-hover: rgba(0, 0, 0, 0.04);
-	--border-color: rgb(234, 234, 234);
-	--box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-	--ifm-out-of-focus: #eaeaea;
-	--box-stroke: #000;
-	--ifm-background-surface-color: #fff;
-	--ifm-color-emphasis-200: #ebedf0;
-	--card-bg: #fff;
+	--light-text-color: #6a6760;
+	--subtitle: #6a6760;
+	--clear-hover: rgba(19, 18, 16, 0.04);
+	--border-color: rgba(19, 18, 16, 0.14);
+	--box-shadow: none;
+	--ifm-out-of-focus: rgba(19, 18, 16, 0.18);
+	--box-stroke: rgba(19, 18, 16, 0.2);
+	--ifm-background-surface-color: #fbfaf8;
+	--ifm-color-emphasis-200: rgba(19, 18, 16, 0.1);
+	--card-bg: #fbfaf8;
+	--signal: #c8340d;
+	--ember: #a8712a;
+	--grid-line: rgba(19, 18, 16, 0.05);
+	--hud-bg: rgba(241, 239, 234, 0.82);
+	--grain-opacity: 0.028;
 	color: var(--text-color);
 }
 
+/* Dark is the operating mode: control-room black, warm off-white readout. */
 [data-theme='dark'] {
-	--background: #18191a;
-	--footer-background: #1f1f1f;
-	--footer-border: #2f2f2f;
-	--text-color: #fff;
-	--plain-button: var(--blue-underlay);
-	--blue-underlay: #424243;
-	--blue-underlay-hover: #5b5c5e;
-	--clear-hover: rgba(255, 255, 255, 0.06);
-	--blue-button-color: white;
-	--light-text-color: #aaa;
-	--subtitle: #8d8d8d;
-	--border-color: rgb(42, 42, 42);
-	--box-shadow: 0 1px 8px rgba(255, 255, 255, 0.2);
-	--ifm-out-of-focus: #505050;
-	--box-stroke: gray;
-	--ifm-background-surface-color: #242526;
-	--ifm-color-emphasis-200: #444950;
-	--card-bg: #3b3b3b;
+	--background: #08090a;
+	--footer-background: #0a0b0c;
+	--footer-border: rgba(236, 233, 227, 0.1);
+	--text-color: #ece9e3;
+	--plain-button: #131416;
+	--blue-underlay: #131416;
+	--blue-underlay-hover: #1b1d20;
+	--clear-hover: rgba(236, 233, 227, 0.06);
+	--blue-button-color: #ece9e3;
+	--light-text-color: #83817b;
+	--subtitle: #83817b;
+	--border-color: rgba(236, 233, 227, 0.11);
+	--box-shadow: none;
+	--ifm-out-of-focus: rgba(236, 233, 227, 0.2);
+	--box-stroke: rgba(236, 233, 227, 0.14);
+	--ifm-background-surface-color: #0e0f11;
+	--ifm-color-emphasis-200: rgba(236, 233, 227, 0.12);
+	--card-bg: #0e0f11;
+	--signal: #ff4a1c;
+	--ember: #e8a33d;
+	--grid-line: rgba(236, 233, 227, 0.04);
+	--hud-bg: rgba(8, 9, 10, 0.72);
+	--grain-opacity: 0.05;
 	color: var(--text-color);
 }
 
@@ -75,6 +95,12 @@ html {
 	font-family:
 		ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
 		'Segoe UI Symbol', 'Noto Color Emoji';
+	background-color: var(--background);
+	color-scheme: dark;
+}
+
+[data-theme='light'] {
+	color-scheme: light;
 }
 
 @layer base {
@@ -133,12 +159,19 @@ html {
 	--color-text: var(--text-color);
 	--color-button-bg: var(--plain-button);
 	--color-card-bg: var(--card-bg);
+	/* Cult chrome */
+	--font-terminal: var(--stack-terminal);
+	--font-display: var(--stack-display);
+	--color-signal: var(--signal);
+	--color-ember: var(--ember);
+	--color-hairline: var(--border-color);
+	--color-grid: var(--grid-line);
 }
 
+/* Surfaces are drawn, not raised: one hairline, square corners, no shadow. */
 @utility border-effect {
-	border: 2px solid var(--box-stroke);
-	border-bottom: 4px solid var(--box-stroke);
-	border-radius: var(--radius-lg);
+	border: var(--hairline) solid var(--border-color);
+	border-radius: 2px;
 }
 
 @utility bluelink {
@@ -152,6 +185,186 @@ html {
 @utility fontbrand {
 	@apply font-brand;
 	font-feature-settings: 'ss03' on;
+}
+
+/* ---------------------------------------------------------------------------
+ * Cult chrome utilities
+ * The page reads as an instrument: mono metadata, serif display, hairlines.
+ * ------------------------------------------------------------------------ */
+
+/* Any label that belongs to the instrument rather than to the product. */
+@utility hud {
+	font-family: var(--stack-terminal);
+	font-size: 10px;
+	line-height: 1.2;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-variant-numeric: tabular-nums;
+}
+
+@utility hud-sm {
+	@apply hud;
+	font-size: 9px;
+	letter-spacing: 0.2em;
+}
+
+@utility hud-lg {
+	@apply hud;
+	font-size: 12px;
+	letter-spacing: 0.14em;
+}
+
+@utility display {
+	font-family: var(--stack-display);
+	font-weight: 400;
+	letter-spacing: -0.015em;
+	line-height: 0.95;
+}
+
+@utility no-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+@utility readout {
+	font-family: var(--stack-terminal);
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: 'zero' 1;
+}
+
+/* Registration marks at the corners of a plate, like a scan target. */
+@utility corner-ticks {
+	position: relative;
+}
+
+@utility hairline-t {
+	border-top: var(--hairline) solid var(--border-color);
+}
+
+@utility hairline-b {
+	border-bottom: var(--hairline) solid var(--border-color);
+}
+
+@utility hairline-l {
+	border-left: var(--hairline) solid var(--border-color);
+}
+
+@utility hairline-r {
+	border-right: var(--hairline) solid var(--border-color);
+}
+
+.corner-ticks::before,
+.corner-ticks::after {
+	content: '';
+	position: absolute;
+	width: var(--tick);
+	height: var(--tick);
+	pointer-events: none;
+	opacity: 0.85;
+}
+
+.corner-ticks::before {
+	top: -1px;
+	left: -1px;
+	border-top: var(--hairline) solid var(--text-color);
+	border-left: var(--hairline) solid var(--text-color);
+}
+
+.corner-ticks::after {
+	bottom: -1px;
+	right: -1px;
+	border-bottom: var(--hairline) solid var(--text-color);
+	border-right: var(--hairline) solid var(--text-color);
+}
+
+/* Engineering grid, barely visible — the sheet the page is drawn on. */
+.blueprint-grid {
+	background-image:
+		linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+	background-size: 64px 64px;
+	background-position: center center;
+}
+
+/* Sensor grain over the whole document. Static, cheap, no repaint. */
+.grain::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	opacity: var(--grain-opacity);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+	mix-blend-mode: overlay;
+}
+
+@keyframes rec-blink {
+	0%,
+	55% {
+		opacity: 1;
+	}
+	56%,
+	100% {
+		opacity: 0.15;
+	}
+}
+
+@keyframes ticker-scroll {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes odometer-settle {
+	from {
+		transform: translateY(var(--odometer-from));
+	}
+	to {
+		transform: translateY(var(--odometer-to));
+	}
+}
+
+@keyframes hud-sweep {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(400%);
+	}
+}
+
+@keyframes boot-dissolve {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes boot-line-in {
+	from {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.grain::after {
+		display: none;
+	}
 }
 
 .experts-pagetitle {

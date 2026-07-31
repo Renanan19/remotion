@@ -45,22 +45,24 @@ export const NewsletterButton: React.FC<{}> = () => {
 			<div className="flex flex-col">
 				<div className={'w-full'}>
 					<div className={'flex flex-col flex-1'}>
-						<SectionTitle>Newsletter</SectionTitle>
+						<SectionTitle index="08" subject="Dispatch">
+							Newsletter
+						</SectionTitle>
 						<form
 							onSubmit={handleSubmit}
 							style={{
 								width: '100%',
 							}}
 						>
-							<div className={'fontbrand text-center mb-10 -mt-4'}>
+							<div className={'fontbrand text-muted mb-8 mt-3 max-w-[60ch]'}>
 								Read about new features and noteworthy updates we have made on
 								Remotion once in a while.{' '}
 							</div>
-							<div className="flex flex-col md:flex-row gap-2 justify-center">
+							<div className="flex flex-col md:flex-row gap-2">
 								<Input
 									disabled={submitting}
 									value={email}
-									className="md:max-w-[400px]"
+									className="md:max-w-[400px] rounded-none border-[var(--border-color)] h-11"
 									onChange={(e) => setEmail(e.target.value)}
 									type={'email'}
 									required
@@ -69,7 +71,7 @@ export const NewsletterButton: React.FC<{}> = () => {
 								<div>
 									<Button
 										type="submit"
-										className="w-14 rounded-full h-14 bg-brand text-white font-bold disabled:text-white/50 disabled:border-black px-0 py-0"
+										className="w-14 rounded-none h-11 border border-[var(--border-color)] bg-text text-[var(--background)] px-0 py-0"
 										disabled={submitting || subscribed}
 									>
 										{subscribed ? (

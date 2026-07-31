@@ -1,52 +1,79 @@
 import React from 'react';
-import {
-	Contributors,
-	DiscordMembers,
-	GitHubStars,
-	InstallsPerMonth,
-	PagesOfDocs,
-	TemplatesAndExamples,
-} from './CommunityStatsItems';
+import {TelemetryCell} from './cult/Telemetry';
 import {SectionTitle} from './VideoAppsTitle';
 
-const SectionLink: React.FC<{
+type Metric = {
+	readonly label: string;
+	readonly value: string;
+	readonly caption: string;
 	readonly href: string;
-	readonly children: React.ReactNode;
-}> = ({href, children}) => (
-	<a
-		target="_blank"
-		href={href}
-		className={'no-underline text-inherit contents'}
-	>
-		{children}
-	</a>
-);
+};
+
+const METRICS: readonly Metric[] = [
+	{
+		label: 'Registry pulls',
+		value: '5M+',
+		caption: 'installs per month',
+		href: 'https://www.npmjs.com/package/remotion',
+	},
+	{
+		label: 'Written record',
+		value: '1000',
+		caption: 'pages of docs',
+		href: 'https://www.remotion.dev/docs/',
+	},
+	{
+		label: 'Starting points',
+		value: '35',
+		caption: 'templates & examples',
+		href: 'https://www.remotion.dev/templates',
+	},
+	{
+		label: 'Public approval',
+		value: '53K',
+		caption: 'GitHub stars',
+		href: 'https://github.com/remotion-dev/remotion',
+	},
+	{
+		label: 'Assembly',
+		value: '10K+',
+		caption: 'Discord members',
+		href: 'https://remotion.dev/discord',
+	},
+	{
+		label: 'Hands on the code',
+		value: '300+',
+		caption: 'contributors',
+		href: 'https://github.com/remotion-dev/remotion/graphs/contributors',
+	},
+];
 
 const CommunityStats: React.FC = () => (
-	<div className={'m-auto max-w-[700px] text-center'}>
-		<SectionTitle>Never build alone</SectionTitle>
-		<div className={'fontbrand text-center mb-10 -mt-4'}>
-			Join a thriving community of developers.
-		</div>
-		<div className={'flex flex-wrap justify-between gap-4 w-full items-center'}>
-			<SectionLink href="https://www.npmjs.com/package/remotion">
-				<InstallsPerMonth />
-			</SectionLink>
-			<SectionLink href="https://www.remotion.dev/docs/">
-				<PagesOfDocs />
-			</SectionLink>
-			<SectionLink href="https://www.remotion.dev/templates">
-				<TemplatesAndExamples />
-			</SectionLink>
-			<SectionLink href="https://github.com/remotion-dev/remotion">
-				<GitHubStars />
-			</SectionLink>
-			<SectionLink href="https://remotion.dev/discord">
-				<DiscordMembers />
-			</SectionLink>
-			<SectionLink href="https://github.com/remotion-dev/remotion/graphs/contributors">
-				<Contributors />
-			</SectionLink>
+	<div className={'m-auto'}>
+		<SectionTitle
+			index="07"
+			subject="Congregation"
+			note="Join a thriving community of developers."
+		>
+			Never build alone
+		</SectionTitle>
+		<div className="h-8" />
+		<div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3'}>
+			{METRICS.map((metric) => (
+				<a
+					key={metric.caption}
+					target="_blank"
+					href={metric.href}
+					className={'no-underline text-inherit block'}
+				>
+					<TelemetryCell
+						label={metric.label}
+						odometer={metric.value}
+						value={metric.value}
+						caption={metric.caption}
+					/>
+				</a>
+			))}
 		</div>
 	</div>
 );

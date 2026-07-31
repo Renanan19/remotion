@@ -27,7 +27,11 @@ function ellipseToPath(cx: number, cy: number): string {
 	return output;
 }
 
-const strokeWidth = 0.035;
+const strokeWidth = 0.0025;
+
+// The orbit stays, but as instrument trace: hairline, warm, barely lit.
+const TRACE_COLOR = 'var(--ember)';
+const TRACE_OPACITY = 0.5;
 
 export const BackgroundAnimation: React.FC = () => {
 	const d = ellipseToPath(0.5, 0.5);
@@ -64,41 +68,42 @@ export const BackgroundAnimation: React.FC = () => {
 				<path
 					d={d}
 					fill="none"
-					stroke="var(--ifm-color-primary)"
+					stroke={TRACE_COLOR}
 					strokeLinecap="round"
-					className="stroke-[0.04] lg:stroke-[0.035]"
+					strokeWidth={strokeWidth}
+					opacity={TRACE_OPACITY}
 					style={{
 						transformOrigin: 'center center',
 						transform: `rotate(120deg)`,
-						animation: `bganimation 20s linear infinite`,
+						animation: `bganimation 40s linear infinite`,
 						strokeDasharray: `${length * 0.2} ${length * 0.8}`,
 					}}
 				/>
 				<path
 					d={d}
 					fill="none"
-					stroke="var(--ifm-color-primary)"
+					stroke={TRACE_COLOR}
 					strokeLinecap="round"
 					strokeWidth={strokeWidth}
-					className="stroke-[0.04] lg:stroke-[0.035]"
+					opacity={TRACE_OPACITY}
 					style={{
 						transformOrigin: 'center center',
 						transform: `rotate(0deg)`,
-						animation: `bganimation 20s linear infinite`,
+						animation: `bganimation 40s linear infinite`,
 						strokeDasharray: `${length * 0.2} ${length * 0.8}`,
 					}}
 				/>
 				<path
 					d={d}
 					fill="none"
-					stroke="var(--ifm-color-primary)"
+					stroke={TRACE_COLOR}
 					strokeLinecap="round"
 					strokeWidth={strokeWidth}
-					className="stroke-[0.04] lg:stroke-[0.035]"
+					opacity={TRACE_OPACITY}
 					style={{
 						transformOrigin: 'center center',
 						transform: `rotate(240deg)`,
-						animation: `bganimation 20s linear infinite`,
+						animation: `bganimation 40s linear infinite`,
 						strokeDasharray: `${length * 0.2} ${length * 0.8}`,
 					}}
 				/>

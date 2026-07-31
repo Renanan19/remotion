@@ -110,7 +110,13 @@ export const Demo: React.FC = () => {
 
 	return (
 		<div id="demo" className="pt-24">
-			<SectionTitle>Interactive demo</SectionTitle>
+			<SectionTitle
+				index="04"
+				subject="Live specimen"
+				note="Rendered in your browser, right now."
+			>
+				Interactive demo
+			</SectionTitle>
 			<div className="max-w-[760px] mx-auto">
 				<div className="h-[105px] relative">
 					<DragAndDropNudge />

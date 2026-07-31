@@ -129,8 +129,10 @@ export const BuiltWithRemotionShowcase: React.FC = () => {
 
 	return (
 		<div ref={containerRef}>
-			<SectionTitle>Built with Remotion</SectionTitle>
-			<div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-6 mt-1">
+			<SectionTitle index="05" subject="Field evidence">
+				Built with Remotion
+			</SectionTitle>
+			<div className="flex flex-wrap gap-x-8 gap-y-3 mb-6 mt-4">
 				{tabs.map((tab, index) => (
 					<button
 						key={tab}
